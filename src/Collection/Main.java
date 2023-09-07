@@ -19,9 +19,12 @@ public class Main {
         arrayList.add(10);
         arrayList.add(11);
 
+        arrayList.add(8,34);
 
-        arrayList.size();
-        arrayList.clear();
+        arrayList.indexOf(2);
+        arrayList.lastIndexOf(2);
+
+        arrayList.remove(5);
 
     }
 }

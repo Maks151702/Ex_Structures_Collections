@@ -27,8 +27,8 @@ public class MyLinkedList implements MyList, Queue{
     }
 
     @Override
-    public boolean remove(Integer object) {
-        return false;
+    public void remove(Integer object) {
+
     }
 
     @Override

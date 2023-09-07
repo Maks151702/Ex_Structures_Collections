@@ -11,7 +11,7 @@ public interface MyList {
 
     void add(int index, Integer object);
 
-    boolean remove(Integer object);
+    void remove(Integer object);
 
     void clear();
 

@@ -5,7 +5,13 @@ public class MyArrayList implements MyList{
 
     Integer[] integerArray = new Integer[10]; // Создание  массива типа Integer
 
+    void show(){
+        System.out.println("Массив:");
+        for(int i=0; i<integerArray.length; i++){
 
+            System.out.println(integerArray[i]);
+        }
+    }
     void upgrade(){
         number = 0;
         for(int i=0; i<integerArray.length; i++){
@@ -14,7 +20,18 @@ public class MyArrayList implements MyList{
             }
         }
         if(number==integerArray.length){
-            integerArray = new Integer[integerArray.length*2];
+            Integer[] timeArray = integerArray;
+
+            for (int i = 0; i < timeArray.length; i++) {
+                timeArray[i] = integerArray[i];
+            }
+
+            integerArray = new Integer [integerArray.length*2];
+
+            // Копируем элементы из временного массива
+            for (int i = 0; i < timeArray.length; i++) {
+                integerArray[i] = timeArray[i];
+            }
         }
     }
     @Override
@@ -55,7 +72,7 @@ public class MyArrayList implements MyList{
         for(int i=0; i<=integerArray.length; i++){
             if(i==integerArray.length){
                 upgrade();
-            }else if(integerArray[i]==null){
+            }if(integerArray[i]==null){
                 integerArray[i]=object;
                 System.out.println(integerArray[i]);
                 break;
@@ -64,44 +81,38 @@ public class MyArrayList implements MyList{
     }
 
     @Override
-    public void add(int index, Integer object) { // добавление по индексу
-        if(integerArray[index]==null){
-            integerArray[index]=object;
+    public void add(int index, Integer object) {
+        if (index < 0 || index > integerArray.length) {
+            throw new IndexOutOfBoundsException("Индекс находится вне допустимых границ");
+        }
 
-        }else if(integerArray[index]!=null){
-            for(int i=index; i<=integerArray.length; i++){
-                if(i>=integerArray.length){
-                    upgrade();
-                    System.out.println("Апгрейд");
+        if (index == integerArray.length) {
+            upgrade();
+        }
+
+        for (int i = integerArray.length - 1; i > index; i--) {
+            integerArray[i] = integerArray[i - 1];
+        }
+
+        integerArray[index] = object;
+    }
+
+
+    @Override
+    public void remove(Integer object) {
+        for (int i = 0; i < integerArray.length; i++) {
+            if (object.equals(integerArray[i])) {
+
+                for (int j = i; j < integerArray.length - 1; j++) {
+                    integerArray[j] = integerArray[j + 1];
+
                 }
-
-                if(integerArray[i]==null){
-                    break;
-                }
-                integerArray[i+1]=integerArray[i];
-                System.out.println(integerArray[i]);
-
-                integerArray[index]=object;
-                System.out.println(integerArray[index]=object);
-
-            }
-        } else if (index>=integerArray.length){
-            for(int i=0; i<=integerArray.length; i++){
-                if(i==integerArray.length){
-                    upgrade();
-                }else if(integerArray[i]==null){
-                    integerArray[i]=object;
-                    System.out.println(integerArray[i]);
-                    break;
-                }
+                integerArray[integerArray.length - 1] = null;
             }
         }
     }
 
-    @Override
-    public boolean remove(Integer object) { //удаление
-        return false;
-    }
+
 
     @Override
     public void clear() { // очистить массив
@@ -112,7 +123,7 @@ public class MyArrayList implements MyList{
 
 
     @Override
-    public Integer get(int index) { //получения элемента по индексу
+    public Integer get(int index) { // получения элемента по индексу
         return integerArray[index];
     }
 
