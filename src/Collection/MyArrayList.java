@@ -1,9 +1,15 @@
 package Collection;
 
-public class MyArrayList implements MyList{
+public class MyArrayList<T> implements MyList<T>{
     int number;
 
-    Integer[] integerArray = new Integer[10]; // Создание  массива типа Integer
+    private T[] integerArray; // Создание массива типа T
+    private int size; // Текущий размер списка
+
+    public MyArrayList() {
+        integerArray = (T[]) new Object[10]; // Инициализация массива
+        size = 0; // Начальный размер списка
+    }
 
     void show(){
         System.out.println("Массив:");
@@ -20,13 +26,13 @@ public class MyArrayList implements MyList{
             }
         }
         if(number==integerArray.length){
-            Integer[] timeArray = integerArray;
+            T[] timeArray = integerArray;
 
             for (int i = 0; i < timeArray.length; i++) {
                 timeArray[i] = integerArray[i];
             }
 
-            integerArray = new Integer [integerArray.length*2];
+            integerArray = (T[]) new Object[integerArray.length * 2];
 
             // Копируем элементы из временного массива
             for (int i = 0; i < timeArray.length; i++) {
@@ -58,7 +64,7 @@ public class MyArrayList implements MyList{
     }
 
     @Override
-    public boolean contains(Integer object) { // возвращает логическое значение, содержит ли массив переданный, как параметр, элемент
+    public boolean contains(T object) { // возвращает логическое значение, содержит ли массив переданный, как параметр, элемент
         for(int i=0; i<integerArray.length; i++){
             if(integerArray[i]==object){
                 return true;
@@ -68,12 +74,12 @@ public class MyArrayList implements MyList{
     }
 
     @Override
-    public void add(Integer object) { // добавление элемента в конец массива
+    public void add(T object) { // добавление элемента в конец массива
         for(int i=0; i<=integerArray.length; i++){
             if(i==integerArray.length){
                 upgrade();
             }if(integerArray[i]==null){
-                integerArray[i]=object;
+                integerArray[i] = object;
                 System.out.println(integerArray[i]);
                 break;
             }
@@ -81,7 +87,7 @@ public class MyArrayList implements MyList{
     }
 
     @Override
-    public void add(int index, Integer object) {
+    public void add(int index, T object) {
         if (index < 0 || index > integerArray.length) {
             throw new IndexOutOfBoundsException("Индекс находится вне допустимых границ");
         }
@@ -94,12 +100,12 @@ public class MyArrayList implements MyList{
             integerArray[i] = integerArray[i - 1];
         }
 
-        integerArray[index] = object;
+        integerArray[index] = (T) object;
     }
 
 
     @Override
-    public void remove(Integer object) {
+    public void remove(T object) {
         for (int i = 0; i < integerArray.length; i++) {
             if (object.equals(integerArray[i])) {
 
@@ -123,31 +129,29 @@ public class MyArrayList implements MyList{
 
 
     @Override
-    public Integer get(int index) { // получения элемента по индексу
-        return integerArray[index];
+    public T get(int index) { // получения элемента по индексу
+        return (T) integerArray[index];
     }
 
     @Override
-    public int indexOf(Integer object) { // получения первого индекса переданного элемента в массиве
+    public int indexOf(T object) { // получения первого индекса переданного элемента в массиве
         for (int i = 0; i < integerArray.length; i++) {
             if(integerArray[i]==object){
                 System.out.println(i);
                 return i;
             }
         }
-        System.out.println("0");
         return 0;
     }
 
     @Override
-    public int lastIndexOf(Integer object) { // - получения последнего индекса переданного элемента в массиве
+    public int lastIndexOf(T object) { // - получения последнего индекса переданного элемента в массиве
         for (int i = integerArray.length-1; i>=0; i--) {
             if(integerArray[i]==object){
                 System.out.println(i);
                 return i;
             }
         }
-        System.out.println("0");
         return 0;
     }
 }

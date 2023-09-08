@@ -1,10 +1,11 @@
 package Collection;
 
-public interface Queue {
+public interface Queue<T> {
 
-    Integer offer();
 
-    void poll();
+    void offer(T object);
 
-    void peek();
+    T poll();
+
+    T peek();
 }
