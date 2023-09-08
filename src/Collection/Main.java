@@ -27,9 +27,17 @@ public class Main {
 //        arrayList.remove(5);
 
 
-        MyLinkedList<String> linkedList = new MyLinkedList();
-        linkedList.add("False");
-        linkedList.add(0,"Fuck");
-        linkedList.printList();
+//        MyLinkedList<String> linkedList = new MyLinkedList();
+//        linkedList.add("False");
+//        linkedList.add(0,"Fuck");
+//        linkedList.printList();
+
+        MyHashMap<String> hashMap = new MyHashMap();
+        hashMap.size();
+        hashMap.isEmpty();
+        hashMap.put("Goal", "Olddd");
+        boolean element = hashMap.remove("Olddd");
+        System.out.println(element);
+        System.out.println(hashMap.keyArray() +"   "+ hashMap.valueArray()+"   "+ hashMap.get("Goal"));
     }
 }

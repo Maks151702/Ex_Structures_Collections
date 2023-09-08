@@ -1,20 +1,20 @@
 package Collection;
 
-public interface MyMap {
+public interface MyMap<T> {
 
     int size();
 
     boolean isEmpty();
 
-    void put(String key, Integer value);
+    void put(String key, T value);
 
     boolean remove(String key);
 
     void clear();
 
-    Integer get(String key);
+    T get(String key);
 
     String[] keyArray();
 
-    Integer[] valueArray();
+    T[] valueArray();
 }
