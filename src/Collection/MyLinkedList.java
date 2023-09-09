@@ -4,11 +4,11 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
 
     private Node<T> head; // Головной элемент списка
     private Node<T> tail; // Последний элемент списка
-    private int size;     // Размер списка
+    private int size;
 
     // Вложенный класс для узла списка
     private static class Node<T> {
-        T data;         // Значение узла
+        T data;
         Node<T> next;   // Ссылка на следующий узел
 
         Node(T data) {
@@ -51,28 +51,25 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
         Node<T> current = head;
         while (current != null) {
             if (current.data.equals(object)) {
-                return true; // Нашли элемент
+                return true;
             }
-            current = current.next; // Переходим к следующему узлу
+            current = current.next;
         }
         return false;
     }
 
     @Override
     public void add(T object) {
-        // Создаем новый узел с заданным значением
-        Node<T> newNode = new Node<T>((T) object);
+        Node<T> newNode = new Node(object);
 
         if (isEmpty()) {
-            // Если список пустой, устанавливаем голову и хвост на новый узел
             head = newNode;
             tail = newNode;
         } else {
-            // Иначе добавляем новый узел в конец списка и обновляем хвост
             tail.next = newNode;
             tail = newNode;
         }
-        size++; // Увеличиваем размер списка
+        size++;
     }
 
     @Override
@@ -84,19 +81,15 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
         Node<T> newNode = new Node<>(object);
 
         if (isEmpty()) {
-            // Если список пустой, устанавливаем новый узел как head и tail
             head = newNode;
             tail = newNode;
         } else if (index == 0) {
-            // Вставляем в начало списка
             newNode.next = head;
             head = newNode;
         } else if (index == size) {
-            // Вставляем в конец списка
             tail.next = newNode;
             tail = newNode;
         } else {
-            // Вставляем в середину списка
             Node<T> previousNode = (Node<T>) get(index - 1);
             newNode.next = previousNode.next;
             previousNode.next = newNode;
@@ -107,16 +100,13 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
 
     @Override
     public void remove(T object) {
-        if (isEmpty()) {
-            // Список пустой, ничего не делаем
+        if (isEmpty()) {  // Список пустой, ничего не делаем
             return;
         }
 
         if (head.data.equals(object)) {
-            // Удаляемый элемент находится в голове списка
             head = head.next;
-            if (head == null) {
-                // Если голова стала null, значит список стал пустым, обновляем tail
+            if (head == null) { // Если голова стала null, значит список стал пустым, обновляем tail
                 tail = null;
             }
             size--;
@@ -126,10 +116,8 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
         Node<T> currentNode = head;
         while (currentNode.next != null) {
             if (currentNode.next.data.equals(object)) {
-                // Нашли элемент для удаления
                 currentNode.next = currentNode.next.next;
                 if (currentNode.next == null) {
-                    // Если следующий элемент стал null, обновляем tail
                     tail = currentNode;
                 }
                 size--;
@@ -144,7 +132,7 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
     public void clear() {
         head = null; // Обнуляем голову списка
         tail = null; // Обнуляем хвост списка
-        size = 0;    // Устанавливаем размер списка в ноль
+        size = 0;
     }
 
 
@@ -170,7 +158,7 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
 
         while (currentNode != null) {
             if (currentNode.data.equals(object)) {
-                return index; // Нашли совпадение, возвращаем индекс
+                return index;
             }
 
             currentNode = currentNode.next;
@@ -188,7 +176,7 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
 
         while (currentNode != null) {
             if (currentNode.data.equals(object)) {
-                return index; // Нашли последнее совпадение, возвращаем индекс
+                return index;
             }
 
             currentNode = currentNode.next;
@@ -204,11 +192,9 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
         Node<T> newNode = new Node<>(object);
 
         if (isEmpty()) {
-            // Если список пустой, устанавливаем новый узел как head и tail
             head = newNode;
             tail = newNode;
         } else {
-            // Вставляем новый узел в конец списка
             tail.next = newNode;
             tail = newNode;
         }
@@ -220,7 +206,7 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
     @Override
     public T poll() {
         if (isEmpty()) {
-            return null; // Возвращаем null, если список пустой
+            return null;
         }
 
         T removedElement = head.data;
@@ -228,7 +214,6 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
         size--;
 
         if (head == null) {
-            // Если удалили последний элемент, обновляем tail
             tail = null;
         }
 
@@ -238,10 +223,10 @@ public class MyLinkedList<T> implements MyList<T>, Queue<T>{
     @Override
     public T peek() {
         if (isEmpty()) {
-            return null; // Возвращаем null, если коллекция пуста
+            return null;
         }
 
-        return head.data; // Возвращаем значение первого элемента
+        return head.data;
     }
 
 }

@@ -23,7 +23,7 @@ public class MyHashMap<T> implements MyMap<T> {
     @Override
     public void put(String key, T value) {
         if (key == null) {
-            throw new IllegalArgumentException("Key cannot be null");
+            throw new IllegalArgumentException("Ключ не введён");
         }
 
         int hash = key.hashCode();
@@ -55,7 +55,7 @@ public class MyHashMap<T> implements MyMap<T> {
     @Override
     public boolean remove(String key) {
         if (key == null) {
-            throw new IllegalArgumentException("Key cannot be null");
+            throw new IllegalArgumentException("Ключ не введён");
         }
 
         int hash = key.hashCode();
@@ -92,7 +92,7 @@ public class MyHashMap<T> implements MyMap<T> {
     @Override
     public T get(String key) {
         if (key == null) {
-            throw new IllegalArgumentException("Key cannot be null");
+            throw new IllegalArgumentException("Ключ не введён");
         }
 
         int hash = key.hashCode();
